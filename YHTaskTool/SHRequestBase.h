@@ -1,0 +1,57 @@
+//
+//  SHRequestBase.h
+//  SHNetworkRequest
+//
+//  Created by CSH on 2019/5/31.
+//  Copyright © 2019 CSH. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+/**
+ 网络请求基础
+ */
+@interface SHRequestBase : NSObject
+
+// 必填
+//地址
+@property (nonatomic, copy) NSString *url;
+
+// 选填
+//进度
+@property (nonatomic, copy) void(^progress)(NSProgress *progress);
+//成功
+@property (nonatomic, copy) void (^success)(id responseObj);
+//失败
+@property (nonatomic, copy) void (^failure)(NSError *error);
+
+//公共参数
+//参数
+@property (nonatomic, strong) id param;
+//请求头
+@property (nonatomic, copy) NSDictionary <NSString *, NSString *> *headers;
+//请求标记
+@property (nonatomic, copy) NSString *tag;
+//重试次数
+@property (nonatomic, assign) NSInteger retry;
+
+#pragma mark 原生GET
+- (void)requestNativeGet;
+
+#pragma mark 原生POST
+- (void)requestNativePOST;
+
+#pragma mark 获取请求队列
+- (NSDictionary *)getRequestQueue;
+
+#pragma mark 取消所有网络请求
+- (void)cancelAllOperations;
+
+#pragma mark 取消某个网络请求
+- (void)cancelOperationsWithTag:(NSString *)tag;
+
+@end
+
+NS_ASSUME_NONNULL_END
