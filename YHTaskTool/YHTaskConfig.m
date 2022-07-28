@@ -15,9 +15,9 @@
                        userId:(NSString *)userId
                       version:(NSString *)version
                        inView:(UIView *_Nullable)inView
-                       result:(void (^_Nullable)(BOOL success))result{
+                       result:(void (^_Nullable)(BOOL success, NSError *error))result{
     //校验
-    NSAssert(appId.length, @"请填入正确的应用标识 appid");
+    NSAssert(appId.length, @"请填入正确的应用标识 appId");
     NSAssert(userId.length, @"请填入正确的用户标识 userId");
     NSAssert(version.length, @"请填入正确的应用版本 version");
     if (!inView) {

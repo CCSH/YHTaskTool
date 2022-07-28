@@ -19,7 +19,7 @@
     // Override point for customization after application launch.
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [YHTaskConfig registerTaskWithAppID:@"1234"
+        [YHTaskConfig registerTaskWithAppID:nil
                                      userId:@"1"
                                     version:@"1.0.0"
                                      inView:nil

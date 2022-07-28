@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
                        userId:(NSString *)userId
                       version:(NSString *)version
                        inView:(UIView *_Nullable)inView
-                       result:(void (^_Nullable)(BOOL success))result;
+                       result:(void (^_Nullable)(BOOL success, NSError *error))result;
 
 /// 卸载
 + (void)uninstall;
