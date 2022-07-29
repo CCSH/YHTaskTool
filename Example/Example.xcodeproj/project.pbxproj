@@ -13,7 +13,7 @@
 		5C42E5262890BF6F0098DA62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C42E5252890BF6F0098DA62 /* Assets.xcassets */; };
 		5C42E5292890BF6F0098DA62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C42E5272890BF6F0098DA62 /* LaunchScreen.storyboard */; };
 		5C42E52C2890BF6F0098DA62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42E52B2890BF6F0098DA62 /* main.m */; };
-		5C42E5352890BFA40098DA62 /* YHTaskConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42E5342890BFA40098DA62 /* YHTaskConfig.m */; };
+		5C42E5352890BFA40098DA62 /* YHTaskTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42E5342890BFA40098DA62 /* YHTaskTool.m */; };
 		5C42E5382890C1F40098DA62 /* YHTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42E5372890C1F40098DA62 /* YHTaskView.m */; };
 		5C42E53B2890C45D0098DA62 /* YHTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42E53A2890C45D0098DA62 /* YHTaskModel.m */; };
 		5C42E5412890CA000098DA62 /* SHRequestBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C42E53F2890CA000098DA62 /* SHRequestBase.m */; };
@@ -34,8 +34,8 @@
 		5C42E5282890BF6F0098DA62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C42E52A2890BF6F0098DA62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C42E52B2890BF6F0098DA62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5C42E5332890BFA40098DA62 /* YHTaskConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHTaskConfig.h; sourceTree = "<group>"; };
-		5C42E5342890BFA40098DA62 /* YHTaskConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHTaskConfig.m; sourceTree = "<group>"; };
+		5C42E5332890BFA40098DA62 /* YHTaskTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHTaskTool.h; sourceTree = "<group>"; };
+		5C42E5342890BFA40098DA62 /* YHTaskTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHTaskTool.m; sourceTree = "<group>"; };
 		5C42E5362890C1F40098DA62 /* YHTaskView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHTaskView.h; sourceTree = "<group>"; };
 		5C42E5372890C1F40098DA62 /* YHTaskView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YHTaskView.m; sourceTree = "<group>"; };
 		5C42E5392890C45D0098DA62 /* YHTaskModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHTaskModel.h; sourceTree = "<group>"; };
@@ -113,8 +113,8 @@
 		5C42E5322890BF830098DA62 /* YHTaskTool */ = {
 			isa = PBXGroup;
 			children = (
-				5C42E5332890BFA40098DA62 /* YHTaskConfig.h */,
-				5C42E5342890BFA40098DA62 /* YHTaskConfig.m */,
+				5C42E5332890BFA40098DA62 /* YHTaskTool.h */,
+				5C42E5342890BFA40098DA62 /* YHTaskTool.m */,
 				5C42E5392890C45D0098DA62 /* YHTaskModel.h */,
 				5C42E53A2890C45D0098DA62 /* YHTaskModel.m */,
 				5C42E5362890C1F40098DA62 /* YHTaskView.h */,
@@ -256,7 +256,7 @@
 				5C42E51B2890BF6E0098DA62 /* AppDelegate.m in Sources */,
 				5C42E55228912E070098DA62 /* SceneDelegate.m in Sources */,
 				5C42E5412890CA000098DA62 /* SHRequestBase.m in Sources */,
-				5C42E5352890BFA40098DA62 /* YHTaskConfig.m in Sources */,
+				5C42E5352890BFA40098DA62 /* YHTaskTool.m in Sources */,
 				5C42E5382890C1F40098DA62 /* YHTaskView.m in Sources */,
 				5C42E52C2890BF6F0098DA62 /* main.m in Sources */,
 				5C42E54F2890DB580098DA62 /* SHWebViewController.m in Sources */,

@@ -6,7 +6,7 @@
 //
 
 #import "AppDelegate.h"
-#import "YHTaskConfig.h"
+#import "YHTaskTool.h"
 
 @interface AppDelegate ()
 
@@ -19,15 +19,15 @@
     // Override point for customization after application launch.
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [YHTaskConfig registerTaskWithAppID:@"APP标识"
-                                     userId:@"用户标识"
-                                    version:@"当前版本"
-                                     inView:nil
-                                     result:^(BOOL success, NSError * _Nonnull error) {
+        [YHTaskTool registerTaskWithAppId:@"APP标识"
+                                   userId:@"用户标识"
+                                  version:@"当前版本"
+                                   inView:nil
+                                   result:^(BOOL success, NSError * _Nonnull error) {
             if (success) {
-                NSLog(@"注册成功");
+                NSLog(@"YHTaskTool注册成功");
             }else{
-                NSLog(@"注册失败:%@",error.userInfo[@"msg"]);
+                NSLog(@"YHTaskTool注册失败：%@",error.userInfo[@"msg"]);
             }
         }];
     });

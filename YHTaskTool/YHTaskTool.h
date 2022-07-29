@@ -1,5 +1,5 @@
 //
-//  YHTaskConfig.h
+//  YHTaskTool.h
 //  Example
 //
 //  Created by CCSH on 2022/7/27.
@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// 任务组件配置工具
-@interface YHTaskConfig : NSObject
+@interface YHTaskTool : NSObject
 
 /// 注册任务组件
 /// @param appId  APP标识
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param version  当前版本号
 /// @param inView  显示View(默认window)
 /// @param result  注册结果回调
-+ (void)registerTaskWithAppID:(NSString *)appId
++ (void)registerTaskWithAppId:(NSString *)appId
                        userId:(NSString *)userId
                       version:(NSString *)version
                        inView:(UIView *_Nullable)inView

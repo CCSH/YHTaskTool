@@ -12,9 +12,9 @@ Pod::Spec.new do |s|
     s.source_files = "#{s.name}/*.{h,m}"
     s.resources = "#{s.name}/#{s.name}.bundle"
     
-    s.dependency "MBProgressHUD", '~> 1.2.0'
-    s.dependency "SHPopView", '~> 1.1.0'
-    s.dependency 'SHExtension/UIView', '~> 1.5.5'
-    s.dependency 'SHExtension/UIButton', '~> 1.5.5'
+    s.dependency "MBProgressHUD"
+    s.dependency "SHPopView"
+    s.dependency 'SHExtension/UIView'
+    s.dependency 'SHExtension/UIButton'
 
 end

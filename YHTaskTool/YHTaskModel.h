@@ -30,11 +30,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark 任务接口
 //任务列表
-@property (nonatomic, strong) NSArray <YHTaskModel *>*task_list;
+@property (nonatomic, strong) NSArray<YHTaskModel *> *task_list;
 //任务累计积分
 @property (nonatomic, copy) NSString *score;
 
-//task_list内容
+// task_list内容
 //任务名称
 @property (nonatomic, copy) NSString *task_name;
 //任务积分
@@ -47,6 +47,5 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger task_state;
 
 @end
-
 
 NS_ASSUME_NONNULL_END

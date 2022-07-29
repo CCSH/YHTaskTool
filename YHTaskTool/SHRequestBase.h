@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- 网络请求基础
- */
+网络请求基础
+*/
 @interface SHRequestBase : NSObject
 
 // 必填
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 选填
 //进度
-@property (nonatomic, copy) void(^progress)(NSProgress *progress);
+@property (nonatomic, copy) void (^progress)(NSProgress *progress);
 //成功
 @property (nonatomic, copy) void (^success)(id responseObj);
 //失败
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 //参数
 @property (nonatomic, strong) id param;
 //请求头
-@property (nonatomic, copy) NSDictionary <NSString *, NSString *> *headers;
+@property (nonatomic, copy) NSDictionary<NSString *, NSString *> *headers;
 //请求标记
 @property (nonatomic, copy) NSString *tag;
 //重试次数

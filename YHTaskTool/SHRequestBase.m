@@ -18,7 +18,6 @@ static NSMutableDictionary *netQueueDic;
 #pragma mark - 请求方法
 #pragma mark 原生GET
 - (void)requestNativeGet {
-    
     NSString *url = [NSString stringWithFormat:@"%@%@", self.url, [self setUrlPara:self.param]];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
     req.URL = [NSURL URLWithString:url];
@@ -51,7 +50,6 @@ static NSMutableDictionary *netQueueDic;
 
 #pragma mark 原生POST
 - (void)requestNativePOST {
-    
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
     req.URL = [NSURL URLWithString:self.url];
     req.HTTPBody = [NSJSONSerialization dataWithJSONObject:self.param options:kNilOptions error:nil];
@@ -117,10 +115,10 @@ static NSMutableDictionary *netQueueDic;
     //移除队列
     [self cancelOperationsWithTag:self.tag];
     
-//    id obj = [responseObject mj_JSONObject];
-//    if (!obj) {
-//        obj = [responseObject mj_JSONString];
-//    }
+    //    id obj = [responseObject mj_JSONObject];
+    //    if (!obj) {
+    //        obj = [responseObject mj_JSONString];
+    //    }
     
     //回调
     if (self.success) {

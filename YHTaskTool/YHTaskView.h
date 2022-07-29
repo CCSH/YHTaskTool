@@ -5,13 +5,13 @@
 //  Created by CCSH on 2022/7/27.
 //
 
-#import <UIKit/UIKit.h>
-#import "YHTaskModel.h"
 #import "UIView+SHExtension.h"
+#import "YHTaskModel.h"
+#import <UIKit/UIKit.h>
 
-//RGB颜色
-#define kRGBA(R,G,B,A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
-#define kRGB(R,G,B) kRGBA(R,G,B,1)
+// RGB颜色
+#define kRGBA(R, G, B, A) [UIColor colorWithRed:R / 255.0 green:G / 255.0 blue:B / 255.0 alpha:A]
+#define kRGB(R, G, B) kRGBA(R, G, B, 1)
 
 #define kColorMain kRGB(241, 55, 55)
 #define kColorText kRGB(51, 51, 51)

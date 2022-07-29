@@ -1,23 +1,40 @@
 # YHTaskTool
 
+体验任务组件
+
 
 > 使用中如果有其他问题可以[`告诉我`](https://github.com/CCSH/YHTaskTool/issues/new)
 
-# 体验任务组件
-
-# 使用 pod 导入
+## 使用 pod 导入
 [![Pod Version](http://img.shields.io/cocoapods/v/YHTaskTool.svg?style=flat)](https://github.com/CCSH/YHTaskTool/releases)
+
 ```
 pod 'YHTaskTool'
 ```
 
-# 使用方法
+## 使用方法
+
+### 1、配置Info.plist文件
+
 ```
-        [YHTaskConfig registerTaskWithAppID:@"APP标识"
-                                     userId:@"用户标识"
-                                    version:@"当前版本"
-                                     inView:nil
-                                     result:^(BOOL success, NSError * _Nonnull error) {
+添加 App Transport Security Settings
+下方再添加 Allow Arbitrary Loads 设置为NO
+```
+
+### 2、引入头文件
+
+```
+#import <YHTaskTool.h>
+```
+
+### 3、写入代码
+
+```
+        [YHTaskTool registerTaskWithAppID:@"APP标识"
+                                   userId:@"用户标识"
+                                  version:@"当前版本"
+                                   inView:nil
+                                   result:^(BOOL success, NSError * _Nonnull error) {
             if (success) {
                 NSLog(@"注册成功");
             }else{
