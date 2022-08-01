@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "YHTaskTool"
-    s.version      = "0.0.1"
+    s.version      = "0.0.2"
     s.summary      = "炎黄任务组件"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }
@@ -9,8 +9,12 @@ Pod::Spec.new do |s|
     s.homepage     = "https://github.com/CCSH/YHTaskTool"
     s.source       = { :git => "https://github.com/CCSH/YHTaskTool.git", :tag => s.version }
     
-    s.source_files = "#{s.name}/*.{h,m}"
-    s.resources = "#{s.name}/#{s.name}.bundle"
+    #s.source_files = "#{s.name}/*.{h,m}"
+    #s.resources = "#{s.name}/#{s.name}.bundle"
+    
+    s.vendored_frameworks = '#{s.name}/YHTaskFramework.framework'
+    s.requires_arc = true
+    s.static_framework = true
     
     s.dependency "MBProgressHUD"
     s.dependency "SHPopView"
