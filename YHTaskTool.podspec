@@ -10,9 +10,9 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/CCSH/#{s.name}.git", :tag => s.version }
     
     #s.source_files = "#{s.name}/*.{h,m}"
-    #s.resources = "#{s.name}/#{s.name}.bundle"
+    #s.resources = ["#{s.name}/#{s.name}.bundle"]
     
-    s.vendored_frameworks = '#{s.name}/*.framework'
+    s.vendored_frameworks = ["#{s.name}/*.framework"]
     s.static_framework = true
     
     s.dependency "MBProgressHUD"

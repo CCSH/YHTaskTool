@@ -1,1 +1,1 @@
-pod trunk push --allow-warnings --use-libraries
+pod trunk push --allow-warnings --use-libraries --verbose
