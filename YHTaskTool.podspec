@@ -6,14 +6,13 @@ Pod::Spec.new do |s|
     s.authors      = { "CCSH" => "624089195@qq.com" }
     s.platform     = :ios, "9.0"
     s.requires_arc = true
-    s.homepage     = "https://github.com/CCSH/YHTaskTool"
-    s.source       = { :git => "https://github.com/CCSH/YHTaskTool.git", :tag => s.version }
+    s.homepage     = "https://github.com/CCSH/#{s.name}"
+    s.source       = { :git => "https://github.com/CCSH/#{s.name}.git", :tag => s.version }
     
     #s.source_files = "#{s.name}/*.{h,m}"
     #s.resources = "#{s.name}/#{s.name}.bundle"
     
-    s.vendored_frameworks = '#{s.name}/YHTaskFramework.framework'
-    s.requires_arc = true
+    s.vendored_frameworks = '#{s.name}/*.framework'
     s.static_framework = true
     
     s.dependency "MBProgressHUD"
