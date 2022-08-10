@@ -18,7 +18,7 @@ pod 'YHTaskTool'
 
 ```
 添加 App Transport Security Settings
-下方再添加 Allow Arbitrary Loads 设置为NO
+下方再添加 Allow Arbitrary Loads 设置为YES
 ```
 
 ### 2、引入头文件
