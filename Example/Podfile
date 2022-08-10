@@ -7,10 +7,9 @@ target 'Example' do
 
   # Pods for Example
 
-	pod 'MBProgressHUD', '~> 1.2.0'
-  pod 'SHPopView', '~> 1.1.0'
-  pod 'SHExtension/UIView', '~> 1.5.5'
-  pod 'SHExtension/UIButton', '~> 1.5.5'
+	pod 'MBProgressHUD'
+  pod 'SHPopView'
+  pod 'SHExtension/UIView'
 
 
 end

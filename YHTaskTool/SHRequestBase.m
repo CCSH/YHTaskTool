@@ -18,9 +18,10 @@ static NSMutableDictionary *netQueueDic;
 #pragma mark - 请求方法
 #pragma mark 原生GET
 - (void)requestNativeGet {
-    NSString *url = [NSString stringWithFormat:@"%@%@", self.url, [self setUrlPara:self.param]];
+    NSString *url = [NSString stringWithFormat:@"%@?%@", self.url, [self setUrlPara:self.param]];
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
     req.URL = [NSURL URLWithString:url];
+    [self handleHeader];
     req.allHTTPHeaderFields = self.headers;
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req
@@ -51,10 +52,11 @@ static NSMutableDictionary *netQueueDic;
 #pragma mark 原生POST
 - (void)requestNativePOST {
     NSMutableURLRequest *req = [[NSMutableURLRequest alloc] init];
-    req.URL = [NSURL URLWithString:self.url];
-    req.HTTPBody = [NSJSONSerialization dataWithJSONObject:self.param options:kNilOptions error:nil];
     req.HTTPMethod = @"POST";
-    req.allHTTPHeaderFields = self.headers;
+    req.URL = [NSURL URLWithString:self.url];
+    
+    NSString *para = [self setUrlPara:self.param];
+    req.HTTPBody = [para dataUsingEncoding:NSUTF8StringEncoding];
     
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:req
                                                                  completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
@@ -115,6 +117,11 @@ static NSMutableDictionary *netQueueDic;
     //移除队列
     [self cancelOperationsWithTag:self.tag];
     
+    id data = responseObject;
+    if ([responseObject isKindOfClass:[NSData class]]) {
+        data = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    }
+    
     //    id obj = [responseObject mj_JSONObject];
     //    if (!obj) {
     //        obj = [responseObject mj_JSONString];
@@ -122,7 +129,7 @@ static NSMutableDictionary *netQueueDic;
     
     //回调
     if (self.success) {
-        self.success(responseObject);
+        self.success(data);
     }
 }
 
@@ -154,7 +161,15 @@ static NSMutableDictionary *netQueueDic;
         [temp addObject:[NSString stringWithFormat:@"%@=%@", key, obj]];
     }];
     
-    return [NSString stringWithFormat:@"?%@", [temp componentsJoinedByString:@"&"]];
+    return [temp componentsJoinedByString:@"&"];
+}
+
+- (void)handleHeader{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:
+                                @{@"content-type":@"application/json;charset=UTF-8",
+                                  @"accept":@"*/*"}];
+    [dic addEntriesFromDictionary:self.headers];
+    self.headers = dic;
 }
 
 @end

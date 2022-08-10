@@ -18,13 +18,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [YHTaskTool registerTaskWithAppId:@"APP标识"
-                                   userId:@"用户标识"
-                                  version:@"当前版本"
+        [YHTaskTool registerTaskWithAppId:1
+                                   userId:@"17600075339"
+                                 userName:@"17600075339"
+                                  version:@"0.0.3"
                                    inView:nil
-                                   result:^(BOOL success, NSError * _Nonnull error) {
-            if (success) {
+                                   result:^(NSError * _Nullable error) {
+            if (!error) {
                 NSLog(@"YHTaskTool注册成功");
             }else{
                 NSLog(@"YHTaskTool注册失败：%@",error.userInfo[@"msg"]);

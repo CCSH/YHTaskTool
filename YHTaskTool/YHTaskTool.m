@@ -15,77 +15,97 @@
 
 #pragma mark - 私有方法
 + (NSError *)getError:(NSString *)name {
-    return [NSError errorWithDomain:kDomain code:-1 userInfo:@{@"msg" : name}];
+    return [NSError errorWithDomain:kDomain code:-1 userInfo:@{@"msg" : name ? : @"请求错误"}];
     ;
 }
 
 #pragma mark - 注册任务组件
-+ (void)registerTaskWithAppId:(NSString *)appId
++ (void)registerTaskWithAppId:(NSInteger)appId
                        userId:(NSString *)userId
+                     userName:(NSString *)userName
                       version:(NSString *)version
-                       inView:(UIView *_Nullable)inView
-                       result:(void (^_Nullable)(BOOL success, NSError *error))result {
+                       inView:(UIView *)inView
+                       result:(void (^)(NSError * _Nullable))result {
     //校验
-    if (!appId.length) {
+    if (!userId.length) {
         if (result) {
-            result(NO, [self getError:@"请填入正确的应用标识 appId"]);
+            result([self getError:@"请填入正确的 userId"]);
         }
         return;
     }
-    if (!userId.length) {
+    if (!userName.length) {
         if (result) {
-            result(NO, [self getError:@"请填入正确的应用标识 userId"]);
+            result([self getError:@"请填入正确的 userName"]);
         }
         return;
     }
     if (!version.length) {
         if (result) {
-            result(NO, [self getError:@"请填入正确的应用标识 version"]);
+            result([self getError:@"请填入正确的 version"]);
         }
         return;
     }
+
     //配置视图
     if (!inView) {
         inView = [YHTaskView getWindow];
     }
     
+    //先移除
+    [self uninstall];
+    
     //视图处理
     YHTaskView *iconView = [YHTaskView share];
-    //数据处理
-    YHTaskModel *data = [[YHTaskModel alloc] init];
-    data.appId = appId;
-    data.userId = userId;
-    data.version = version;
-    iconView.data = data;
     
     CGFloat view_wh = 60;
     CGFloat space = 10;
     iconView.frame = CGRectMake(inView.width - view_wh - space, inView.centerY, view_wh, view_wh);
     iconView.dragEdge = UIEdgeInsetsMake(space, inView.width - view_wh - space, space, space);
-    //先移除
-    [iconView removeFromSuperview];
     
     //去注册
-    NSString *url = @"https://www.baidu.com";
+    NSString *url = [NSString stringWithFormat:@"%@%@",kHost,kMobileRegisterInterface];
     //数据处理
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
-    
+    param[@"applicationPlatform"] = @"0";
+
+    if (appId) {
+        param[@"appId"] = @(appId);
+    }
+    if (userId) {
+        param[@"userFlag"] = userId;
+    }
+    if (version) {
+        param[@"version"] = version;
+    }
+    if (userName) {
+        param[@"userName"] = userName;
+    }
     //请求
     SHRequestBase *request = [[SHRequestBase alloc] init];
     request.url = url;
     request.param = param;
     request.success = ^(id _Nonnull responseObj) {
-        if (result) {
-            result(YES, nil);
+        NSDictionary *data = responseObj;
+        if ([data[@"code"] intValue] == 200) {
+            [inView addSubview:iconView];
+            YHTaskModel *model = [[YHTaskModel alloc]init];
+            model.token = data[@"data"][@"registerUniqueID"];
+            iconView.data = model;
+            if (result) {
+                result(nil);
+            }
+        }else{
+            if (result) {
+                result([self getError:data[@"msg"]]);
+            }
         }
-        [inView addSubview:iconView];
     };
     request.failure = ^(NSError *_Nonnull error) {
         if (result) {
-            result(NO, [self getError:@"请求错误"]);
+            result([self getError:@"请求错误"]);
         }
     };
-    [request requestNativeGet];
+    [request requestNativePOST];
 }
 
 /// 卸载

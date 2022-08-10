@@ -9,7 +9,6 @@
 #import "SHPopView.h"
 #import "SHRequestBase.h"
 #import "SHWebViewController.h"
-#import "UIButton+SHExtension.h"
 #import "YHTaskView.h"
 
 //引用
@@ -134,20 +133,21 @@ __typeof__(object) object = block##_##object;
         ver.y = version.maxY;
         
         //升级
-        UIButton *btn = [[UIButton alloc] init];
-        btn.backgroundColor = [UIColor clearColor];
-        btn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
-        [btn setTitle:@"升级" forState:UIControlStateNormal];
-        btn.x = 39;
-        btn.width = bgImg.width - 2 * btn.x;
-        btn.height = 38;
-        btn.y = bgImg.height - 30 - btn.height;
+        UIButton *updateBtn = [[UIButton alloc] init];
+        updateBtn.backgroundColor = [UIColor clearColor];
+        updateBtn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+        [updateBtn setTitle:@"升级" forState:UIControlStateNormal];
+        updateBtn.tag = 10;
+        updateBtn.x = 39;
+        updateBtn.width = bgImg.width - 2 * updateBtn.x;
+        updateBtn.height = 38;
+        updateBtn.y = bgImg.height - 30 - updateBtn.height;
         
         UIView *bgView = [[UIView alloc] init];
-        bgView.frame = btn.frame;
+        bgView.frame = updateBtn.frame;
         
         CAGradientLayer *gl = [CAGradientLayer layer];
-        gl.frame = CGRectMake(0, 0, btn.width, btn.height);
+        gl.frame = CGRectMake(0, 0, updateBtn.width, updateBtn.height);
         gl.startPoint = CGPointMake(0, 0.5);
         gl.endPoint = CGPointMake(1, 0.5);
         gl.colors = @[ (__bridge id)[UIColor colorWithRed:249 / 255.0 green:108 / 255.0 blue:78 / 255.0 alpha:1.0].CGColor, (__bridge id)[UIColor colorWithRed:231 / 255.0 green:40 / 255.0 blue:51 / 255.0 alpha:1.0].CGColor ];
@@ -156,19 +156,9 @@ __typeof__(object) object = block##_##object;
         [bgView.layer addSublayer:gl];
         [bgImg addSubview:bgView];
         
-        [bgImg addSubview:btn];
+        [bgImg addSubview:updateBtn];
         
-        [btn addClickBlock:^(UIButton *_Nonnull btn) {
-            if (@available(iOS 10.0, *)) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.update_url]
-                                                   options:@{}
-                                         completionHandler:^(BOOL success) {
-                    exit(1);
-                }];
-            } else {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.update_url]];
-            }
-        }];
+        [updateBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         
         //更新文案
         UIScrollView *scroll = [[UIScrollView alloc] init];
@@ -179,7 +169,7 @@ __typeof__(object) object = block##_##object;
         scroll.y = 163;
         scroll.x = 20;
         scroll.width = bgImg.width - 2 * scroll.x;
-        scroll.height = btn.y - scroll.y - 10;
+        scroll.height = updateBtn.y - scroll.y - 10;
         
         NSArray *temp = [model.update_content componentsSeparatedByString:@"\n"];
         
@@ -281,44 +271,55 @@ __typeof__(object) object = block##_##object;
             
             //按钮
             switch (obj.task_state) {
-                case 0: //未体验
-                {
-                    //去体验
-                    UIButton *btn = [self getBtn:0 data:obj];
-                    btn.centerY = scoreLab.centerY;
-                    btn.x = scroll.width - btn.width;
-                    [scroll addSubview:btn];
-                    
-                    view = btn;
-                } break;
-                case 1: //未评价
+                case 0: //未评价
                 {
                     //查看任务
-                    UIButton *btn = [self getBtn:3 data:obj];
+                    UIButton *btn = [self getBtn:2 data:obj];
                     btn.centerY = scoreLab.centerY;
                     btn.x = scroll.width - btn.width;
                     [scroll addSubview:btn];
+                    btn.tag = 20 + idx;
+                    [btn addTarget:self action:@selector(btn2Action:) forControlEvents:UIControlEventTouchUpInside];
                     
                     //去评价
                     UIButton *btn2 = [self getBtn:1 data:obj];
                     btn2.centerY = scoreLab.centerY;
                     btn2.x = btn.x - btn2.width - 10;
                     [scroll addSubview:btn2];
+                    btn2.tag = 20 + idx;
+                    [btn2 addTarget:self action:@selector(btn1Action:) forControlEvents:UIControlEventTouchUpInside];
+                    
                     view = btn;
                 } break;
-                case 2: //任务完成
+                case 1: //任务完成
                 {
                     //查看任务
-                    UIButton *btn = [self getBtn:3 data:obj];
+                    UIButton *btn = [self getBtn:2 data:obj];
                     btn.centerY = scoreLab.centerY;
                     btn.x = scroll.width - btn.width;
                     [scroll addSubview:btn];
+                    btn.tag = 20 + idx;
+                    [btn addTarget:self action:@selector(btn2Action:) forControlEvents:UIControlEventTouchUpInside];
                     
                     //查看评价
-                    UIButton *btn2 = [self getBtn:2 data:obj];
+                    UIButton *btn2 = [self getBtn:3 data:obj];
                     btn2.centerY = scoreLab.centerY;
                     btn2.x = btn.x - btn2.width - 10;
                     [scroll addSubview:btn2];
+                    btn2.tag = 20 + idx;
+                    [btn2 addTarget:self action:@selector(btn1Action:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                    view = btn;
+                } break;
+                case 2: //未体验
+                {
+                    //去体验
+                    UIButton *btn = [self getBtn:0 data:obj];
+                    btn.centerY = scoreLab.centerY;
+                    btn.x = scroll.width - btn.width;
+                    [scroll addSubview:btn];
+                    btn.tag = 20 + idx;
+                    [btn addTarget:self action:@selector(btn0Action:) forControlEvents:UIControlEventTouchUpInside];
                     
                     view = btn;
                 } break;
@@ -343,29 +344,6 @@ __typeof__(object) object = block##_##object;
     btn.backgroundColor = kColorMain;
     btn.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     [btn borderRadius:btn.height / 2 width:1 color:kColorMain];
-    @weakify(self);
-    [btn addClickBlock:^(UIButton *_Nonnull btn) {
-        @strongify(self);
-        [self.popView hide];
-        switch (type) {
-            case 0: //去体验
-            {
-                [self requestTaskFinish:data];
-            } break;
-            case 1: //去评价
-            case 3: //查看评价
-            {
-                [self openUrl:data.task_evaluation_url];
-            } break;
-            case 2: //查看任务
-            {
-                [self openUrl:data.task_url];
-            } break;
-            default:
-                break;
-        }
-    }];
-    
     switch (type) {
         case 0: {
             [btn setTitle:@"去体验" forState:UIControlStateNormal];
@@ -422,10 +400,71 @@ __typeof__(object) object = block##_##object;
     return activeVC;
 }
 
-#pragma mark 事件
-- (void)btnAction:(YHTaskView *)btn {
-    //请求
-    [self requestUpdate];
+#pragma mark 弹窗处理
+- (void)handleHUB:(MBProgressHUD *)hub text:(NSString *)text {
+    hub.label.text = text ?: @"请求失败";
+    hub.mode = MBProgressHUDModeText;
+    [hub hideAnimated:YES afterDelay:1];
+}
+
+#pragma mark 操作处理
+- (void)handleBtn:(NSInteger)type data:(YHTaskModel *)data {
+    [self.popView hide];
+    switch (type) {
+        case 0: //去体验
+        {
+            [self requestTaskFinish:data];
+        } break;
+        case 1: //去评价
+        case 3: //查看评价
+        {
+            [self openUrl:data.task_evaluation_url];
+        } break;
+        case 2: //查看任务
+        {
+            [self openUrl:data.task_url];
+        } break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - 事件
+- (void)btnAction:(UIButton *)btn {
+    switch (btn.tag) {
+        case 10: {
+            //升级
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.data.update_url]
+                                                   options:@{}
+                                         completionHandler:^(BOOL success) {
+                    exit(1);
+                }];
+            } else {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.data.update_url]];
+            }
+        } break;
+        default: {
+            //点击icon、请求更新
+            [self requestUpdate];
+        } break;
+    }
+}
+
+#pragma mark 操作点击
+- (void)btn0Action:(UIButton *)btn {
+    //去体验
+    [self handleBtn:0 data:self.data.task_list[btn.tag - 20]];
+}
+
+- (void)btn1Action:(UIButton *)btn {
+    //评价
+    [self handleBtn:1 data:self.data.task_list[btn.tag - 20]];
+}
+
+- (void)btn2Action:(UIButton *)btn {
+    //查看任务
+    [self handleBtn:2 data:self.data.task_list[btn.tag - 20]];
 }
 
 #pragma mark - 请求
@@ -434,10 +473,13 @@ __typeof__(object) object = block##_##object;
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:[YHTaskView getWindow] animated:YES];
     
     //网址
-    NSString *url = @"https://www.baidu.com";
+    NSString *url = [NSString stringWithFormat:@"%@%@", kHost, kMobileNewVersionUpdateInterface];
     
     //数据处理
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    if (self.data.token) {
+        param[@"registeredLogo"] = self.data.token;
+    }
     
     //请求
     SHRequestBase *request = [[SHRequestBase alloc] init];
@@ -447,37 +489,46 @@ __typeof__(object) object = block##_##object;
     @weakify(self);
     request.success = ^(id _Nonnull responseObj) {
         @strongify(self);
-        [hub hideAnimated:YES];
-        BOOL update = arc4random() % 2;
-        if (update) {
-            YHTaskModel *model = [[YHTaskModel alloc] init];
-            model.update_ver = @"9.2";
-            model.update_content = @"1.人脸识别功能优化，提升识别的准确性；\n2.关怀版优化，增强了语音播报的准确性；\n3.修复了部分已知问题，提升APP的稳定性。";
-            model.update_url = @"https://www.baidu.com";
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.popView hide];
-                self.popView = [self showPopView:model isUpdate:YES];
-                [self.popView show];
-            });
+        NSDictionary *data = responseObj;
+        if ([data[@"code"] intValue] == 200) {
+            [hub hideAnimated:YES];
+            NSDictionary *dic = data[@"data"][@"updateInfo"];
+            BOOL update = [dic[@"updateLogo"] boolValue];
+            if (update) {
+                YHTaskModel *model = [[YHTaskModel alloc] init];
+                model.update_ver = dic[@"version"];
+                model.update_content = dic[@"updateDescription"];
+                model.update_url = dic[@"downUrl"];
+                self.data.update_url = model.update_url;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.popView hide];
+                    self.popView = [self showPopView:model isUpdate:YES];
+                    [self.popView show];
+                });
+            } else {
+                [self requestTask];
+            }
         } else {
-            [self requestTask];
+            [self handleHUB:hub text:data[@"msg"]];
         }
     };
     request.failure = ^(NSError *_Nonnull error) {
-        [hub hideAnimated:YES];
+        [self handleHUB:hub text:nil];
     };
-    [request requestNativeGet];
+    [request requestNativePOST];
 }
 
 #pragma mark 请求任务
 - (void)requestTask {
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:[YHTaskView getWindow] animated:YES];
     //网址
-    NSString *url = @"https://www.baidu.com";
+    NSString *url = [NSString stringWithFormat:@"%@%@", kHost, kMobileTaskListInterface];
     
     //数据处理
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    if (self.data.token) {
+        param[@"registeredLogo"] = self.data.token;
+    }
     
     //请求
     SHRequestBase *request = [[SHRequestBase alloc] init];
@@ -487,43 +538,61 @@ __typeof__(object) object = block##_##object;
     @weakify(self);
     request.success = ^(id _Nonnull responseObj) {
         @strongify(self);
-        [hub hideAnimated:YES];
-        
-        YHTaskModel *model = [[YHTaskModel alloc] init];
-        model.score = @"1";
-        
-        NSMutableArray *arr = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 5; i++) {
-            YHTaskModel *obj = [[YHTaskModel alloc] init];
-            obj.task_url = @"https://www.baidu.com";
-            obj.task_evaluation_url = @"https://www.hao123.com";
-            obj.task_name = [NSString stringWithFormat:@"%d、随机任务---%u", i, arc4random() % 100];
-            obj.task_state = arc4random() % 3;
-            obj.task_score = [NSString stringWithFormat:@"%u", arc4random() % 10];
-            [arr addObject:obj];
+        NSDictionary *data = responseObj;
+        if ([data[@"code"] intValue] == 200) {
+            [hub hideAnimated:YES];
+            NSMutableArray *temp = [[NSMutableArray alloc] init];
+            NSArray *arr = data[@"data"][@"subtaskDetails"];
+            
+            if (arr.count) {
+                YHTaskModel *model = [[YHTaskModel alloc] init];
+                
+                [arr enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *_Nonnull stop) {
+                    YHTaskModel *task = [[YHTaskModel alloc] init];
+                    task.task_id = obj[@"id"];
+                    task.task_url = obj[@"httpUrl"];
+                    task.task_evaluation_url = obj[@"evaluateUrl"];
+                    task.task_name = obj[@"childTaskName"];
+                    task.task_state = [obj[@"state"] intValue];
+                    task.task_score = obj[@"tasksIntegral"];
+                    [temp addObject:task];
+                }];
+                model.score = [NSString stringWithFormat:@"%d", [data[@"data"][@"userSCurrentTotalPoints"] intValue]];
+                model.task_list = temp;
+                self.data.task_list = temp;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.popView hide];
+                    self.popView = [self showPopView:model isUpdate:NO];
+                    [self.popView show];
+                });
+            } else {
+                [self handleHUB:hub text:@"您暂时没有体验任务"];
+            }
+        } else {
+            [self handleHUB:hub text:data[@"msg"]];
         }
-        model.task_list = arr;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.popView hide];
-            self.popView = [self showPopView:model isUpdate:NO];
-            [self.popView show];
-        });
     };
     request.failure = ^(NSError *_Nonnull error) {
-        [hub hideAnimated:YES];
+        [self handleHUB:hub text:nil];
     };
-    [request requestNativeGet];
+    [request requestNativePOST];
 }
 
 #pragma mark 任务完成
-- (void)requestTaskFinish:(YHTaskModel *)data {
+- (void)requestTaskFinish:(YHTaskModel *)model {
     MBProgressHUD *hub = [MBProgressHUD showHUDAddedTo:[YHTaskView getWindow] animated:YES];
     //网址
-    NSString *url = @"https://www.baidu.com";
+    NSString *url = [NSString stringWithFormat:@"%@%@", kHost, kMobileChangeStateInformation];
     
     //数据处理
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    if (model.task_id) {
+        param[@"childTaskId"] = model.task_id;
+    }
+    if (self.data.token) {
+        param[@"registeredLogo"] = self.data.token;
+    }
     
     //请求
     SHRequestBase *request = [[SHRequestBase alloc] init];
@@ -533,13 +602,18 @@ __typeof__(object) object = block##_##object;
     @weakify(self);
     request.success = ^(id _Nonnull responseObj) {
         @strongify(self);
-        [hub hideAnimated:YES];
-        [self openUrl:data.task_url];
+        NSDictionary *data = responseObj;
+        if ([data[@"code"] intValue] == 200) {
+            [hub hideAnimated:YES];
+            [self openUrl:model.task_url];
+        } else {
+            [self handleHUB:hub text:data[@"msg"]];
+        }
     };
     request.failure = ^(NSError *_Nonnull error) {
-        [hub hideAnimated:YES];
+        [self handleHUB:hub text:nil];
     };
-    [request requestNativeGet];
+    [request requestNativePOST];
 }
 
 #pragma mark - 公共方法
@@ -562,6 +636,7 @@ __typeof__(object) object = block##_##object;
 + (UIImage *)getImage:(NSString *)name {
     return [[YHTaskView new] getImage:name];
 }
+
 - (UIImage *)getImage:(NSString *)name {
     NSString *bundle = [[NSBundle bundleForClass:[self class]] pathForResource:@"YHTaskTool" ofType:@"bundle"];
     return [UIImage imageWithContentsOfFile:[[NSBundle bundleWithPath:bundle] pathForResource:name ofType:@"png"]];

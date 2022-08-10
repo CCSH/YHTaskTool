@@ -8,6 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark - 主机地址
+#define kHost @"http://ecstest2018.10010.com/experienceCenter/mobileExperience/"
+
+#pragma mark - 接口
+#pragma mark 移动端注册接口
+#define kMobileRegisterInterface @"mobileRegisterInterface"
+
+#pragma mark 移动端查询版本更新接口
+#define kMobileNewVersionUpdateInterface @"mobileNewVersionUpdateInterface"
+
+#pragma mark 移动端任务列表接口
+#define kMobileTaskListInterface @"mobileTaskListInterface"
+
+#pragma mark 移动端任务列表变更状态接口
+#define kMobileChangeStateInformation @"mobileChangeStateInformation"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**

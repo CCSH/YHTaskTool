@@ -11,14 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YHTaskModel : NSObject
 
-#pragma mark 外部参数
-@property (nonatomic, copy) NSString *appId;
-@property (nonatomic, copy) NSString *userId;
-@property (nonatomic, copy) NSString *version;
-
 #pragma mark 注册接口
 //客户端用户唯一标识
-@property (nonatomic, copy) NSString *client_id;
+@property (nonatomic, copy) NSString *token;
 
 #pragma mark 更新接口
 //更新版本
@@ -35,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *score;
 
 // task_list内容
+//任务ID
+@property (nonatomic, copy) NSString *task_id;
 //任务名称
 @property (nonatomic, copy) NSString *task_name;
 //任务积分
@@ -43,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *task_url;
 //评价链接
 @property (nonatomic, copy) NSString *task_evaluation_url;
-//任务状态(0 未体验、1 未评价、2 已完成)
+//任务状态(0 未评价、1 已完成、2 未体验)
 @property (nonatomic, assign) NSInteger task_state;
 
 @end

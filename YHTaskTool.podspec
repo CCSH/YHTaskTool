@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "YHTaskTool"
-    s.version      = "0.0.2"
+    s.version      = "0.0.3"
     s.summary      = "炎黄任务组件"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }
@@ -18,6 +18,5 @@ Pod::Spec.new do |s|
     s.dependency "MBProgressHUD"
     s.dependency "SHPopView"
     s.dependency 'SHExtension/UIView'
-    s.dependency 'SHExtension/UIButton'
 
 end
