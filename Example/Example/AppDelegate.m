@@ -21,9 +21,9 @@
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [YHTaskTool registerTaskWithAppId:1
-                                   userId:@"17600075339"
-                                 userName:@"17600075339"
-                                  version:@"0.0.3"
+                                   userId:@"1"
+                                 userName:@"1"
+                                  version:@"0.0.1"
                                    inView:nil
                                    result:^(NSError * _Nullable error) {
             if (!error) {
