@@ -18,7 +18,7 @@ pod 'YHTaskTool'
 
 ```
 添加 App Transport Security Settings
-下方再添加 Allow Arbitrary Loads 设置为NO
+下方再添加 Allow Arbitrary Loads 设置为YES
 ```
 
 ### 2、引入头文件
@@ -30,15 +30,16 @@ pod 'YHTaskTool'
 ### 3、写入代码
 
 ```
-        [YHTaskTool registerTaskWithAppID:@"APP标识"
-                                   userId:@"用户标识"
-                                  version:@"当前版本"
+        [YHTaskTool registerTaskWithAppId:应用标识
+                                   userId:@"用户id"
+                                 userName:@"用户名"
+                                  version:@"版本号"
                                    inView:nil
-                                   result:^(BOOL success, NSError * _Nonnull error) {
-            if (success) {
-                NSLog(@"注册成功");
+                                   result:^(NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"YHTaskTool注册成功");
             }else{
-                NSLog(@"注册失败:%@",error.userInfo[@"msg"]);
+                NSLog(@"YHTaskTool注册失败：%@",error.userInfo[@"msg"]);
             }
         }];
 ```
