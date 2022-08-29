@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "YHTaskTool"
-    s.version      = "0.0.4"
+    s.version      = "0.0.5"
     s.summary      = "炎黄任务组件"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }

@@ -66,7 +66,7 @@
     NSString *url = [NSString stringWithFormat:@"%@%@",kHost,kMobileRegisterInterface];
     //数据处理
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
-    param[@"applicationPlatform"] = @"1";
+    param[@"applicationPlatform"] = @"0";
     if (appId) {
         param[@"appId"] = @(appId);
     }
