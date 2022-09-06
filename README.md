@@ -27,7 +27,7 @@ pod 'YHTaskTool'
 #import <YHTaskTool.h>
 ```
 
-### 3、写入代码
+### 3、注册位置写入代码
 
 ```
         [YHTaskTool registerTaskWithAppId:应用标识
