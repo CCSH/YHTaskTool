@@ -6,7 +6,6 @@
 //
 
 #import "AppDelegate.h"
-#import "YHTaskTool.h"
 
 @interface AppDelegate ()
 
@@ -17,23 +16,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [YHTaskTool registerTaskWithAppId:1
-                                   userId:@"1"
-                                 userName:@"1"
-                                  version:@"0.0.1"
-                                   inView:nil
-                                   result:^(NSError * _Nullable error) {
-            if (!error) {
-                NSLog(@"YHTaskTool注册成功");
-            }else{
-                NSLog(@"YHTaskTool注册失败：%@",error.userInfo[@"msg"]);
-            }
-        }];
-    });
-    
+    self.window = [[UIWindow alloc] init];
+    self.window.frame = [UIScreen mainScreen].bounds;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
