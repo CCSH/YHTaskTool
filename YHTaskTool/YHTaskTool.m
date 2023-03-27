@@ -16,7 +16,6 @@
 #pragma mark - 私有方法
 + (NSError *)getError:(NSString *)name {
     return [NSError errorWithDomain:kDomain code:-1 userInfo:@{@"msg" : name ? : @"请求错误"}];
-    ;
 }
 
 #pragma mark - 注册任务组件
